@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Conexa</string>
+    <string name="search_hint">Search contacts</string>
+    <string name="no_favorites_title">No Favorites Yet</string>
+    <string name="no_favorites_desc">Contacts you star will show up here for quick access.</string>
+    <string name="no_contacts_found">No contacts found</string>
+    <string name="permission_rationale_title">Contact Access Needed</string>
+    <string name="permission_rationale_desc">Conexa needs access to your contacts to display and manage them. Your data stays on your device.</string>
+</resources>
