@@ -1,0 +1,72 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:gravity="center_vertical"
+	android:paddingLeft="18dp"
+	android:paddingRight="18dp"
+	android:paddingTop="10dp"
+	android:paddingBottom="10dp"
+	android:background="?android:attr/selectableItemBackground">
+	<FrameLayout
+		android:id="@+id/frame_layout3"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:elevation="1dp">
+		<ImageView
+			android:id="@+id/avatarImage"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:background="@drawable/bg_avatar_1"
+			android:src="@drawable/default_image"
+			android:scaleType="centerCrop"
+			android:focusable="false" />
+		<TextView
+			android:id="@+id/avatarInitial"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_horizontal|center_vertical"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#FFFFFF"
+			android:focusable="false" />
+	</FrameLayout>
+	<LinearLayout
+		android:id="@+id/linear4"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="14dp"
+		android:orientation="vertical"
+		android:layout_weight="1">
+		<TextView
+			android:id="@+id/contactName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="17sp"
+			android:textStyle="bold"
+			android:singleLine="true"
+			android:focusable="false"
+			android:ellipsize="end" />
+		<TextView
+			android:id="@+id/contactSubtext"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="2dp"
+			android:textSize="13sp"
+			android:singleLine="true"
+			android:focusable="false"
+			android:ellipsize="end" />
+	</LinearLayout>
+	<ImageView
+		android:id="@+id/starIndicator"
+		android:layout_width="18dp"
+		android:layout_height="18dp"
+		android:src="@drawable/ic_star_filled"
+		android:scaleType="center"
+		android:focusable="false"
+		android:visibility="gone"
+		android:tint="@color/accent_primary" />
+</LinearLayout>
