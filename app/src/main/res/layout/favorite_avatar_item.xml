@@ -1,0 +1,46 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:gravity="center"
+	android:layout_marginRight="16dp"
+	android:paddingTop="4dp"
+	android:paddingBottom="4dp">
+	<FrameLayout
+		android:id="@+id/frame_layout14"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		android:elevation="2dp">
+		<ImageView
+			android:id="@+id/favAvatarImage"
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+			android:background="@drawable/bg_avatar_1"
+			android:src="@drawable/default_image"
+			android:scaleType="centerCrop"
+			android:focusable="false" />
+		<TextView
+			android:id="@+id/favAvatarInitial"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_horizontal|center_vertical"
+			android:textSize="22sp"
+			android:textStyle="bold"
+			android:textColor="#FFFFFF"
+			android:focusable="false" />
+	</FrameLayout>
+	<TextView
+		android:id="@+id/favName"
+		android:layout_width="70dp"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="6dp"
+		android:gravity="center_horizontal|center_vertical"
+		android:textSize="13sp"
+		android:textStyle="bold"
+		android:focusable="false"
+		android:maxLines="1"
+		android:ellipsize="end" />
+</LinearLayout>
