@@ -1,0 +1,67 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@color/bg_primary"
+	android:fitsSystemWindows="true">
+	<TextView
+		android:id="@+id/textview20"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="18dp"
+		android:text="Favorites"
+		android:textSize="30sp"
+		android:textStyle="bold"
+		android:letterSpacing="0.01" />
+	<FrameLayout
+		android:id="@+id/frame_layout35"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/favoritesRecyclerView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingTop="4dp"
+			android:paddingBottom="16dp"
+			android:clipToPadding="false"
+			android:scrollbars="none" />
+		<LinearLayout
+			android:id="@+id/favEmptyState"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="40dp"
+			android:gravity="center_horizontal|center_vertical"
+			android:orientation="vertical"
+			android:visibility="gone">
+			<ImageView
+				android:id="@+id/imageview18"
+				android:layout_width="80dp"
+				android:layout_height="80dp"
+				android:src="@drawable/ic_empty_favorites"
+				android:scaleType="center"
+				android:tint="@color/text_secondary" />
+			<TextView
+				android:id="@+id/textview21"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="18dp"
+				android:text="@string/no_favorites_title"
+				android:textSize="19sp"
+				android:textStyle="bold" />
+			<TextView
+				android:id="@+id/textview22"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:gravity="center_horizontal|center_vertical"
+				android:text="@string/no_favorites_desc"
+				android:textSize="14sp"
+				android:lineSpacingExtra="4dp" />
+		</LinearLayout>
+	</FrameLayout>
+	<include layout="@layout/bottom_nav" />
+</LinearLayout>
