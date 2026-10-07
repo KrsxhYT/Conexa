@@ -1,0 +1,248 @@
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/bg_primary"
+	android:fitsSystemWindows="true"
+	android:scrollbars="none">
+	<LinearLayout
+		android:id="@+id/linear61"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		<TextView
+			android:id="@+id/textview35"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="18dp"
+			android:text="Settings"
+			android:textSize="30sp"
+			android:textStyle="bold"
+			android:letterSpacing="0.01" />
+		<TextView
+			android:id="@+id/textview36"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="18dp"
+			android:paddingBottom="8dp"
+			android:text="APPEARANCE"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:letterSpacing="0.08" />
+		<LinearLayout
+			android:id="@+id/linear62"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="18dp"
+			android:layout_marginRight="18dp"
+			android:padding="4dp"
+			android:background="@drawable/bg_card"
+			android:orientation="vertical"
+			android:elevation="1dp">
+			<LinearLayout
+				android:id="@+id/themeRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowLL">
+				<TextView
+					android:id="@+id/textview37"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="Theme"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<TextView
+					android:id="@+id/themeValueText"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginRight="8dp"
+					android:text="System Default"
+					android:textSize="14sp" />
+				<ImageView
+					android:id="@+id/imageview22"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:src="@drawable/ic_chevron_right"
+					android:scaleType="center"
+					android:tint="@color/text_secondary" />
+			</LinearLayout>
+		</LinearLayout>
+		<TextView
+			android:id="@+id/textview38"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="18dp"
+			android:paddingTop="20dp"
+			android:paddingBottom="8dp"
+			android:text="CONTACTS"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:letterSpacing="0.08" />
+		<LinearLayout
+			android:id="@+id/linear63"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="18dp"
+			android:layout_marginRight="18dp"
+			android:padding="4dp"
+			android:background="@drawable/bg_card"
+			android:orientation="vertical"
+			android:elevation="1dp">
+			<LinearLayout
+				android:id="@+id/sortOrderRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowFlat">
+				<TextView
+					android:id="@+id/textview39"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="Sort contacts"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<TextView
+					android:id="@+id/sortValueText"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="First name"
+					android:textSize="14sp" />
+			</LinearLayout>
+			<View
+				android:id="@+id/view64"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsDivider" />
+			<LinearLayout
+				android:id="@+id/nameFormatRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowFlat">
+				<TextView
+					android:id="@+id/textview40"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="Name format"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<TextView
+					android:id="@+id/nameFormatValueText"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="First Last"
+					android:textSize="14sp" />
+			</LinearLayout>
+		</LinearLayout>
+		<TextView
+			android:id="@+id/textview41"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="18dp"
+			android:paddingTop="20dp"
+			android:paddingBottom="8dp"
+			android:text="PRIVACY"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:letterSpacing="0.08" />
+		<LinearLayout
+			android:id="@+id/linear65"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="18dp"
+			android:layout_marginRight="18dp"
+			android:padding="4dp"
+			android:background="@drawable/bg_card"
+			android:orientation="vertical"
+			android:elevation="1dp">
+			<LinearLayout
+				android:id="@+id/blockedListRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowFlat">
+				<TextView
+					android:id="@+id/textview42"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="Blocked contacts"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<ImageView
+					android:id="@+id/imageview23"
+					android:layout_width="18dp"
+					android:layout_height="18dp"
+					android:src="@drawable/ic_chevron_right"
+					android:scaleType="center"
+					android:tint="@color/text_secondary" />
+			</LinearLayout>
+			<View
+				android:id="@+id/view66"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsDivider" />
+			<LinearLayout
+				android:id="@+id/permissionRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowFlat">
+				<TextView
+					android:id="@+id/textview43"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="Permission management"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<ImageView
+					android:id="@+id/imageview24"
+					android:layout_width="18dp"
+					android:layout_height="18dp"
+					android:src="@drawable/ic_chevron_right"
+					android:scaleType="center"
+					android:tint="@color/text_secondary" />
+			</LinearLayout>
+		</LinearLayout>
+		<TextView
+			android:id="@+id/textview44"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="18dp"
+			android:paddingTop="20dp"
+			android:paddingBottom="8dp"
+			android:text="APP"
+			android:textSize="12sp"
+			android:textStyle="bold"
+			android:letterSpacing="0.08" />
+		<LinearLayout
+			android:id="@+id/linear67"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="18dp"
+			android:layout_marginRight="18dp"
+			android:layout_marginBottom="30dp"
+			android:padding="4dp"
+			android:background="@drawable/bg_card"
+			android:orientation="vertical"
+			android:elevation="1dp">
+			<LinearLayout
+				android:id="@+id/aboutSettingsRow"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				style="@style/SettingsRowFlat">
+				<TextView
+					android:id="@+id/textview45"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="About Conexa"
+					android:textSize="16sp"
+					android:layout_weight="1" />
+				<TextView
+					android:id="@+id/textview46"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="v1.0"
+					android:textSize="14sp" />
+			</LinearLayout>
+		</LinearLayout>
+		<include layout="@layout/bottom_nav" />
+	</LinearLayout>
+</ScrollView>
