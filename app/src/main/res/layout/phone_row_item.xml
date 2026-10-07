@@ -1,0 +1,68 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/bg_card"
+	android:orientation="horizontal"
+	android:gravity="center_vertical"
+	android:padding="16dp"
+	android:layout_marginBottom="10dp"
+	android:elevation="1dp">
+	<ImageView
+		android:id="@+id/imageview16"
+		android:layout_width="22dp"
+		android:layout_height="22dp"
+		android:src="@drawable/ic_call"
+		android:scaleType="center"
+		android:focusable="false"
+		android:tint="@color/accent_primary" />
+	<LinearLayout
+		android:id="@+id/linear32"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="14dp"
+		android:orientation="vertical"
+		android:layout_weight="1">
+		<TextView
+			android:id="@+id/phoneNumberText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="17sp"
+			android:textStyle="bold"
+			android:singleLine="true"
+			android:focusable="false"
+			android:ellipsize="end" />
+		<TextView
+			android:id="@+id/phoneLabelText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="2dp"
+			android:textSize="13sp"
+			android:singleLine="true"
+			android:focusable="false"
+			android:ellipsize="end" />
+	</LinearLayout>
+	<ImageButton
+		android:id="@+id/rowVideoBtn"
+		android:layout_width="32dp"
+		android:layout_height="32dp"
+		android:padding="4dp"
+		android:background="@drawable/bg_ripple"
+		android:src="@drawable/ic_video"
+		android:scaleType="center"
+		android:focusable="false"
+		android:tint="@color/text_primary" />
+	<ImageButton
+		android:id="@+id/rowMessageBtn"
+		android:layout_width="32dp"
+		android:layout_height="32dp"
+		android:layout_marginLeft="8dp"
+		android:padding="4dp"
+		android:background="@drawable/bg_ripple"
+		android:src="@drawable/ic_message"
+		android:scaleType="center"
+		android:focusable="false"
+		android:tint="@color/text_primary" />
+</LinearLayout>
