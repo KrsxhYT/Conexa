@@ -3,6 +3,7 @@ package com.krsxh.conexa;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.*;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,9 +20,10 @@ public class MainActivity extends android.app.Activity {
 
     private EditText searchInput;
     private ImageButton clearSearchBtn, profileBtn;
+    private View addContactBtn;
     private RecyclerView contactsRecyclerView;
     private LinearLayout favoritesRow, favoritesSection, emptyStateLayout, permissionLayout;
-    private TextView emptyStateText, grantPermissionBtn;
+    private TextView emptyStateText, grantPermissionBtn, contactsCount;
     private ProgressBar loadingSpinner;
     private LinearLayout navHome, navFavorites, navSettings, navProfile;
 
@@ -44,6 +46,8 @@ public class MainActivity extends android.app.Activity {
         searchInput = findViewById(R.id.searchInput);
         clearSearchBtn = findViewById(R.id.clearSearchBtn);
         profileBtn = findViewById(R.id.profileBtn);
+        addContactBtn = findViewById(R.id.addContactBtn);
+        contactsCount = findViewById(R.id.contactsCount);
         contactsRecyclerView = findViewById(R.id.contactsRecyclerView);
         favoritesRow = findViewById(R.id.favoritesRow);
         favoritesSection = findViewById(R.id.favoritesSection);
@@ -67,6 +71,17 @@ public class MainActivity extends android.app.Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        });
+        addContactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+                try {
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException e) {
+                    Toast.makeText(MainActivity.this, R.string.could_not_open_contacts, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         clearSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +221,9 @@ public class MainActivity extends android.app.Activity {
     }
 
     private void renderContactList(List<ContactModel> contacts) {
+        int countString = contacts.size() == 1
+            ? R.string.contacts_count_singular : R.string.contacts_count_plural;
+        contactsCount.setText(getString(countString, contacts.size()));
         if (contacts.isEmpty()) {
             emptyStateLayout.setVisibility(View.VISIBLE);
             contactsRecyclerView.setVisibility(View.GONE);

@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Conexa</string>
+    <string name="home_title">Your people</string>
+    <string name="home_subtitle">Stay close to everyone who matters.</string>
+    <string name="all_contacts">All contacts</string>
+    <string name="add_contact">Add contact</string>
+    <string name="contacts_count_singular">%1$d contact</string>
+    <string name="contacts_count_plural">%1$d contacts</string>
+    <string name="could_not_open_contacts">Could not open the contacts app.</string>
     <string name="search_hint">Search contacts</string>
     <string name="no_favorites_title">No Favorites Yet</string>
     <string name="no_favorites_desc">Contacts you star will show up here for quick access.</string>
