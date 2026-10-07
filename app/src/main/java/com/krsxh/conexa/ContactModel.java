@@ -1,4 +1,4 @@
-package com.krsxh.conexa.models;
+package com.krsxh.conexa;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,7 +27,7 @@ jobs:
           gradle-version: '8.13'
 
       - name: Build Debug APK
-        run: gradle assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Find APK
         run: find . -type f -name "*.apk"

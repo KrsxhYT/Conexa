@@ -1,4 +1,4 @@
-package com.krsxh.conexa.adapters;
+package com.krsxh.conexa;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.krsxh.conexa.ContactinfoActivity;
-import com.krsxh.conexa.R;
-import com.krsxh.conexa.models.ContactModel;
-import com.krsxh.conexa.utils.ContactUtils;
 import java.util.*;
 
 public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

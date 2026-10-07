@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.*;
-import com.krsxh.conexa.models.ContactModel;
-import com.krsxh.conexa.utils.ContactUtils;
 import com.krsxh.conexa.utils.PermissionUtils;
 import com.krsxh.conexa.utils.PreferencesManager;
 import java.util.List;

@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.*;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.krsxh.conexa.adapters.ContactAdapter;
-import com.krsxh.conexa.models.ContactModel;
-import com.krsxh.conexa.utils.ContactUtils;
+import com.krsxh.conexa.ContactAdapter;
+import com.krsxh.conexa.ContactModel;
+import com.krsxh.conexa.ContactUtils;
 import com.krsxh.conexa.utils.PermissionUtils;
 import java.util.*;
 

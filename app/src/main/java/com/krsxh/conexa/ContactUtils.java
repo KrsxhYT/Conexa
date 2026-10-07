@@ -1,10 +1,9 @@
-package com.krsxh.conexa.utils;
+package com.krsxh.conexa;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import com.krsxh.conexa.models.ContactModel;
 import java.util.*;
 
 public class ContactUtils {
