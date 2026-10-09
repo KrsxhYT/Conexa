@@ -27,7 +27,7 @@
 				android:background="@drawable/bg_ripple"
 				android:src="@drawable/ic_back"
 				android:scaleType="center"
-				android:tint="@color/text_primary" />
+				app:tint="@color/text_primary" />
 			<View
 				android:id="@+id/view25"
 				android:layout_width="0dp"
@@ -41,7 +41,7 @@
 				android:background="@drawable/bg_ripple"
 				android:src="@drawable/ic_edit"
 				android:scaleType="center"
-				android:tint="@color/text_primary" />
+				app:tint="@color/text_primary" />
 			<ImageButton
 				android:id="@+id/shareBtn"
 				android:layout_width="40dp"
@@ -51,7 +51,7 @@
 				android:background="@drawable/bg_ripple"
 				android:src="@drawable/ic_share"
 				android:scaleType="center"
-				android:tint="@color/text_primary" />
+				app:tint="@color/text_primary" />
 		</LinearLayout>
 		<FrameLayout
 			android:id="@+id/frame_layout26"
@@ -100,7 +100,7 @@
 				android:background="@drawable/bg_ripple"
 				android:src="@drawable/ic_star_outline"
 				android:scaleType="center"
-				android:tint="@color/accent_primary" />
+				app:tint="@color/accent_primary" />
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/linear28"

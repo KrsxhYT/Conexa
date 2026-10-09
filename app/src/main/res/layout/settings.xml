@@ -66,7 +66,7 @@
 					android:layout_height="20dp"
 					android:src="@drawable/ic_chevron_right"
 					android:scaleType="center"
-					android:tint="@color/text_secondary" />
+					app:tint="@color/text_secondary" />
 			</LinearLayout>
 		</LinearLayout>
 		<TextView
@@ -173,7 +173,7 @@
 					android:layout_height="18dp"
 					android:src="@drawable/ic_chevron_right"
 					android:scaleType="center"
-					android:tint="@color/text_secondary" />
+					app:tint="@color/text_secondary" />
 			</LinearLayout>
 			<View
 				android:id="@+id/view66"
@@ -198,7 +198,7 @@
 					android:layout_height="18dp"
 					android:src="@drawable/ic_chevron_right"
 					android:scaleType="center"
-					android:tint="@color/text_secondary" />
+					app:tint="@color/text_secondary" />
 			</LinearLayout>
 		</LinearLayout>
 		<TextView

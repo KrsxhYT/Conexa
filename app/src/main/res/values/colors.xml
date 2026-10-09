@@ -1,18 +1,18 @@
 <resources>
-    <color name="colorAccent">#635BDB</color>
-    <color name="colorPrimary">#635BDB</color>
-    <color name="colorPrimaryDark">#4D46B8</color>
-    <color name="colorControlHighlight">#E8E6FF</color>
-    <color name="colorControlNormal">#635BDB</color>
-    <color name="bg_primary">#F7F8FC</color>
+    <color name="colorAccent">#007AFF</color>
+    <color name="colorPrimary">#007AFF</color>
+    <color name="colorPrimaryDark">#0059C7</color>
+    <color name="colorControlHighlight">#D6E9FF</color>
+    <color name="colorControlNormal">#007AFF</color>
+    <color name="bg_primary">#F2F2F7</color>
     <color name="bg_secondary">#FFFFFF</color>
     <color name="surface_card">#FFFFFF</color>
     <color name="surface_elevated">#FFFFFF</color>
-    <color name="text_primary">#202338</color>
-    <color name="text_secondary">#73788D</color>
-    <color name="text_tertiary">#A1A5B4</color>
-    <color name="divider">#ECEEF4</color>
-    <color name="accent_primary">#635BDB</color>
+    <color name="text_primary">#1C1C1E</color>
+    <color name="text_secondary">#6D6D72</color>
+    <color name="text_tertiary">#8E8E93</color>
+    <color name="divider">#E5E5EA</color>
+    <color name="accent_primary">#007AFF</color>
     <color name="accent_star">#E5A820</color>
     <color name="accent_error">#D94F62</color>
     <color name="accent_success">#258C69</color>
@@ -21,5 +21,5 @@
     <color name="avatar_bg_3">#D08770</color>
     <color name="avatar_bg_4">#78A887</color>
     <color name="avatar_bg_5">#B48EAD</color>
-    <color name="nav_selected_bg">#F0EFFF</color>
+    <color name="nav_selected_bg">#E5F1FF</color>
 </resources>

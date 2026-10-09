@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.krsxh.conexa.utils.PreferencesManager;
 import java.util.*;
 
 public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -32,15 +33,22 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void buildList(List<ContactModel> contacts) {
         items.clear();
         List<ContactModel> sorted = new ArrayList<ContactModel>(contacts);
+        final boolean sortByLastName = new PreferencesManager(context)
+            .getSortOrder().equals("last_name");
         Collections.sort(sorted, new Comparator<ContactModel>() {
             @Override
             public int compare(ContactModel a, ContactModel b) {
-                return a.name.compareToIgnoreCase(b.name);
+                String aSortName = sortByLastName ? lastName(a.name) : a.name;
+                String bSortName = sortByLastName ? lastName(b.name) : b.name;
+                int nameComparison = aSortName.compareToIgnoreCase(bSortName);
+                return nameComparison != 0 ? nameComparison : a.name.compareToIgnoreCase(b.name);
             }
         });
         String currentSection = "";
         for (ContactModel c : sorted) {
-            String initial = c.getInitial().toUpperCase(Locale.US);
+            String sectionName = sortByLastName ? lastName(c.name) : c.name;
+            String initial = sectionName.isEmpty()
+                ? "#" : String.valueOf(Character.toUpperCase(sectionName.charAt(0)));
             if (!initial.matches("[A-Z]")) initial = "#";
             if (!initial.equals(currentSection)) {
                 currentSection = initial;
@@ -48,6 +56,13 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
             items.add(c);
         }
+    }
+
+    private String lastName(String name) {
+        if (name == null) return "";
+        String trimmed = name.trim();
+        int separator = trimmed.lastIndexOf(' ');
+        return separator >= 0 ? trimmed.substring(separator + 1) : trimmed;
     }
 
     @Override

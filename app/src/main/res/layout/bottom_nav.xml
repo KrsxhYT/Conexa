@@ -27,7 +27,7 @@
 			android:scaleType="center"
 			android:focusable="false"
 			android:contentDescription="Home"
-			android:tint="@color/text_secondary" />
+			app:tint="@color/text_secondary" />
 		<TextView
 			android:id="@+id/navHomeText"
 			android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
 			android:scaleType="center"
 			android:focusable="false"
 			android:contentDescription="Favorites"
-			android:tint="@color/text_secondary" />
+			app:tint="@color/text_secondary" />
 		<TextView
 			android:id="@+id/navFavoritesText"
 			android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
 			android:scaleType="center"
 			android:focusable="false"
 			android:contentDescription="Settings"
-			android:tint="@color/text_secondary" />
+			app:tint="@color/text_secondary" />
 		<TextView
 			android:id="@+id/navSettingsText"
 			android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
 			android:scaleType="center"
 			android:focusable="false"
 			android:contentDescription="Profile"
-			android:tint="@color/text_secondary" />
+			app:tint="@color/text_secondary" />
 		<TextView
 			android:id="@+id/navProfileText"
 			android:layout_width="wrap_content"

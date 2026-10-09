@@ -65,7 +65,7 @@ public class SettingsActivity extends android.app.Activity {
         navFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new android.content.Intent(SettingsActivity.this, FavouritesActivity.class));
+                startActivity(new android.content.Intent(SettingsActivity.this, FavoritesActivity.class));
             }
         });
         navSettings.setOnClickListener(new View.OnClickListener() {

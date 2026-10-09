@@ -70,5 +70,5 @@
 		android:scaleType="center"
 		android:focusable="false"
 		android:visibility="gone"
-		android:tint="@color/accent_primary" />
+		app:tint="@color/accent_primary" />
 </LinearLayout>

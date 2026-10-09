@@ -17,7 +17,7 @@
 		android:src="@drawable/ic_call"
 		android:scaleType="center"
 		android:focusable="false"
-		android:tint="@color/accent_primary" />
+		app:tint="@color/accent_primary" />
 	<LinearLayout
 		android:id="@+id/linear32"
 		android:layout_width="0dp"
@@ -53,7 +53,7 @@
 		android:src="@drawable/ic_video"
 		android:scaleType="center"
 		android:focusable="false"
-		android:tint="@color/text_primary" />
+		app:tint="@color/text_primary" />
 	<ImageButton
 		android:id="@+id/rowMessageBtn"
 		android:layout_width="32dp"
@@ -64,5 +64,5 @@
 		android:src="@drawable/ic_message"
 		android:scaleType="center"
 		android:focusable="false"
-		android:tint="@color/text_primary" />
+		app:tint="@color/text_primary" />
 </LinearLayout>
