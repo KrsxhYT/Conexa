@@ -1,26 +1,32 @@
 package com.krsxh.conexa;
 
 import android.content.Intent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.*;
 import com.krsxh.conexa.utils.PermissionUtils;
 import com.krsxh.conexa.utils.PreferencesManager;
-import java.util.List;
 
-public class ContactinfoActivity extends android.app.Activity {
+public class ContactinfoActivity extends BaseActivity {
 
     private ImageButton backBtn, editBtn, shareBtn, starBtn;
     private ImageView detailAvatarImage;
-    private TextView detailAvatarInitial, detailName, blockBtn;
+    private TextView detailAvatarInitial, detailName, detailSubtitle, blockBtn;
     private LinearLayout callAction, messageAction, videoAction, shareAction, phoneListContainer;
+    private ProgressBar detailLoadingIndicator;
 
     private ContactModel contact;
     private PreferencesManager prefsManager;
     private long contactId;
     private String pendingCallNumber;
+    private HandlerThread contactLoaderThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,9 @@ public class ContactinfoActivity extends android.app.Activity {
         prefsManager = new PreferencesManager(this);
         contactId = getIntent().getLongExtra("contact_id", -1);
         bindViews();
-        loadContact();
         setupListeners();
+        setContactActionsEnabled(false);
+        loadContactAsync();
     }
 
     private void bindViews() {
@@ -41,35 +48,81 @@ public class ContactinfoActivity extends android.app.Activity {
         detailAvatarImage = findViewById(R.id.detailAvatarImage);
         detailAvatarInitial = findViewById(R.id.detailAvatarInitial);
         detailName = findViewById(R.id.detailName);
+        detailSubtitle = findViewById(R.id.detailSubtitle);
         blockBtn = findViewById(R.id.blockBtn);
         callAction = findViewById(R.id.callAction);
         messageAction = findViewById(R.id.messageAction);
         videoAction = findViewById(R.id.videoAction);
         shareAction = findViewById(R.id.shareAction);
         phoneListContainer = findViewById(R.id.phoneListContainer);
+        detailLoadingIndicator = findViewById(R.id.detailLoadingIndicator);
     }
 
-    private void loadContact() {
-        List<ContactModel> all = ContactUtils.loadAllContacts(this);
-        for (ContactModel c : all) {
-            if (c.id == contactId) { contact = c; break; }
-        }
-        if (contact == null) {
-            Toast.makeText(this, "Contact not found. It may have been deleted.", Toast.LENGTH_SHORT).show();
+    private void loadContactAsync() {
+        if (!PermissionUtils.hasContactsPermission(this)) {
+            Toast.makeText(this, R.string.permission_rationale_desc, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-        renderContact();
+        contactLoaderThread = new HandlerThread("ContactDetailLoader");
+        contactLoaderThread.start();
+        new Handler(contactLoaderThread.getLooper()).post(() -> {
+            ContactModel loaded = null;
+            for (ContactModel candidate : ContactUtils.loadAllContacts(this)) {
+                if (candidate.id == contactId) {
+                    loaded = candidate;
+                    break;
+                }
+            }
+            ContactModel result = loaded;
+            runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+                detailLoadingIndicator.setVisibility(View.GONE);
+                if (result == null) {
+                    Toast.makeText(this, R.string.contact_not_found, Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
+                contact = result;
+                setContactActionsEnabled(true);
+                renderContact();
+            });
+        });
+    }
+
+    private void setContactActionsEnabled(boolean enabled) {
+        editBtn.setEnabled(enabled);
+        shareBtn.setEnabled(enabled);
+        starBtn.setEnabled(enabled);
+        callAction.setEnabled(enabled);
+        messageAction.setEnabled(enabled);
+        videoAction.setEnabled(enabled);
+        shareAction.setEnabled(enabled);
+        blockBtn.setEnabled(enabled);
     }
 
     private void renderContact() {
         detailName.setText(contact.name);
+        String subtitle = contact.jobTitle;
+        if (contact.organization != null && !contact.organization.trim().isEmpty()) {
+            subtitle = subtitle == null || subtitle.trim().isEmpty()
+                ? contact.organization
+                : getString(R.string.organization_format, subtitle, contact.organization);
+        }
+        if (subtitle == null || subtitle.trim().isEmpty()) {
+            detailSubtitle.setVisibility(View.GONE);
+        } else {
+            detailSubtitle.setText(subtitle);
+            detailSubtitle.setVisibility(View.VISIBLE);
+        }
 
         if (contact.photoUri != null) {
             detailAvatarInitial.setVisibility(View.GONE);
+            detailAvatarImage.setClipToOutline(true);
             detailAvatarImage.setImageURI(Uri.parse(contact.photoUri));
         } else {
             detailAvatarImage.setBackgroundResource(ContactUtils.avatarDrawableRes(contact.name, this));
+            detailAvatarImage.setClipToOutline(true);
             detailAvatarInitial.setVisibility(View.VISIBLE);
             detailAvatarInitial.setText(contact.getInitial());
         }
@@ -81,13 +134,16 @@ public class ContactinfoActivity extends android.app.Activity {
         blockBtn.setTextColor(getResources().getColor(blocked ? R.color.accent_success : R.color.accent_error));
 
         phoneListContainer.removeAllViews();
+        addSectionHeading(R.string.contact_details);
+        if (contact.phones.isEmpty() && contact.emails.isEmpty() && contact.addresses.isEmpty()) {
+            addEmptyDetails(R.string.no_contact_details);
+            return;
+        }
+
         if (contact.phones.isEmpty()) {
-            TextView noPhone = new TextView(this);
-            noPhone.setText("No phone number available");
-            noPhone.setTextColor(getResources().getColor(R.color.text_secondary));
-            noPhone.setPadding(0, 10, 0, 10);
-            phoneListContainer.addView(noPhone);
+            addEmptyDetails(R.string.no_phone_number);
         } else {
+            addSectionHeading(R.string.phone_numbers);
             for (final ContactModel.PhoneEntry phone : contact.phones) {
                 View row = getLayoutInflater().inflate(R.layout.phone_row_item, phoneListContainer, false);
                 TextView numberText = row.findViewById(R.id.phoneNumberText);
@@ -104,6 +160,10 @@ public class ContactinfoActivity extends android.app.Activity {
                         makeCall(phone.number);
                     }
                 });
+                row.setOnLongClickListener(v -> {
+                    copyNumber(phone.number);
+                    return true;
+                });
                 videoBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -119,6 +179,82 @@ public class ContactinfoActivity extends android.app.Activity {
 
                 phoneListContainer.addView(row);
             }
+        }
+
+        if (!contact.emails.isEmpty()) {
+            addSectionHeading(R.string.email_addresses);
+            for (final ContactModel.EmailEntry email : contact.emails) {
+                addDataRow(email.address, email.label, R.drawable.ic_email, () -> sendEmail(email.address));
+            }
+        }
+
+        if (!contact.addresses.isEmpty()) {
+            addSectionHeading(R.string.addresses);
+            for (final ContactModel.AddressEntry address : contact.addresses) {
+                addDataRow(address.address, address.label, R.drawable.ic_profile,
+                    () -> openAddress(address.address));
+            }
+        }
+
+    }
+
+    private void addSectionHeading(int titleRes) {
+        TextView heading = new TextView(this);
+        heading.setText(titleRes);
+        heading.setTextColor(getResources().getColor(R.color.text_secondary));
+        heading.setTextSize(13);
+        heading.setTypeface(heading.getTypeface(), android.graphics.Typeface.BOLD);
+        heading.setPadding(2, 12, 2, 8);
+        phoneListContainer.addView(heading);
+    }
+
+    private void addEmptyDetails(int messageRes) {
+        TextView message = new TextView(this);
+        message.setText(messageRes);
+        message.setTextColor(getResources().getColor(R.color.text_secondary));
+        message.setBackgroundResource(R.drawable.bg_card);
+        int padding = (int) (16 * getResources().getDisplayMetrics().density);
+        message.setPadding(padding, padding, padding, padding);
+        phoneListContainer.addView(message);
+    }
+
+    private void addDataRow(String value, String label, int iconRes, Runnable action) {
+        View row = getLayoutInflater().inflate(R.layout.contact_data_row, phoneListContainer, false);
+        TextView valueView = row.findViewById(R.id.dataRowValue);
+        TextView labelView = row.findViewById(R.id.dataRowLabel);
+        ImageView icon = row.findViewById(R.id.dataRowIcon);
+        valueView.setText(value);
+        labelView.setText(label);
+        icon.setImageResource(iconRes);
+        row.setContentDescription(getString(
+            iconRes == R.drawable.ic_email
+                ? R.string.contact_email_description
+                : R.string.contact_address_description, value));
+        row.setOnClickListener(v -> action.run());
+        phoneListContainer.addView(row);
+    }
+
+    private void copyNumber(String number) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.phone_numbers), number));
+        Toast.makeText(this, R.string.number_copied, Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendEmail(String address) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", address, null));
+        try {
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.could_not_open_email, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void openAddress(String address) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + Uri.encode(address)));
+        try {
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.could_not_open_maps, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -210,7 +346,7 @@ public class ContactinfoActivity extends android.app.Activity {
             return;
         }
         try {
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", number, null));
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(this, "Unable to place call", Toast.LENGTH_SHORT).show();
@@ -219,7 +355,7 @@ public class ContactinfoActivity extends android.app.Activity {
 
     private void sendMessage(String number) {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + number));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null));
             startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(this, "Unable to open messaging app", Toast.LENGTH_SHORT).show();
@@ -228,7 +364,7 @@ public class ContactinfoActivity extends android.app.Activity {
 
     private void startVideoCall(String number) {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + number));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("tel", number, null));
             intent.putExtra("android.intent.extra.video_call", true);
             startActivity(intent);
         } catch (Exception e) {
@@ -279,5 +415,11 @@ public class ContactinfoActivity extends android.app.Activity {
             }
             pendingCallNumber = null;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (contactLoaderThread != null) contactLoaderThread.quitSafely();
+        super.onDestroy();
     }
 }

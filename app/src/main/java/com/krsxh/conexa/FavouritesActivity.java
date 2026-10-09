@@ -12,7 +12,7 @@ import com.krsxh.conexa.ContactUtils;
 import com.krsxh.conexa.utils.PermissionUtils;
 import java.util.*;
 
-public class FavouritesActivity extends android.app.Activity {
+public class FavouritesActivity extends BaseActivity {
 
     private RecyclerView favoritesRecyclerView;
     private LinearLayout favEmptyState;
@@ -38,6 +38,7 @@ public class FavouritesActivity extends android.app.Activity {
     private void highlightTab() {
         ImageView icon = findViewById(R.id.navFavoritesIcon);
         TextView text = findViewById(R.id.navFavoritesText);
+        navFavorites.setSelected(true);
         icon.setColorFilter(getResources().getColor(R.color.accent_primary));
         text.setTextColor(getResources().getColor(R.color.accent_primary));
     }

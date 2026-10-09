@@ -53,6 +53,13 @@
 				android:scaleType="center"
 				app:tint="@color/text_primary" />
 		</LinearLayout>
+		<ProgressBar
+			android:id="@+id/detailLoadingIndicator"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="20dp"
+			android:indeterminateTint="@color/accent_primary" />
 		<FrameLayout
 			android:id="@+id/frame_layout26"
 			android:layout_width="120dp"
@@ -66,6 +73,7 @@
 				android:layout_height="120dp"
 				android:background="@drawable/bg_avatar_1"
 				android:src="@drawable/default_image"
+				android:clipToOutline="true"
 				android:scaleType="centerCrop" />
 			<TextView
 				android:id="@+id/detailAvatarInitial"
@@ -76,6 +84,15 @@
 				android:textStyle="bold"
 				android:textColor="#FFFFFF" />
 		</FrameLayout>
+		<TextView
+			android:id="@+id/detailSubtitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			android:gravity="center"
+			android:textColor="@color/text_secondary"
+			android:textSize="14sp"
+			android:visibility="gone" />
 		<LinearLayout
 			android:id="@+id/linear27"
 			android:layout_width="wrap_content"

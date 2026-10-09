@@ -20,6 +20,7 @@
 			android:layout_height="60dp"
 			android:background="@drawable/bg_avatar_1"
 			android:src="@drawable/default_image"
+			android:clipToOutline="true"
 			android:scaleType="centerCrop"
 			android:focusable="false" />
 		<TextView

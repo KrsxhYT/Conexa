@@ -16,7 +16,7 @@ import com.krsxh.conexa.ContactUtils;
 import com.krsxh.conexa.utils.PermissionUtils;
 import java.util.*;
 
-public class MainActivity extends android.app.Activity {
+public class MainActivity extends BaseActivity {
 
     private EditText searchInput;
     private ImageButton clearSearchBtn, profileBtn;
@@ -133,6 +133,7 @@ public class MainActivity extends android.app.Activity {
     private void highlightNavTab() {
         ImageView icon = findViewById(R.id.navHomeIcon);
         TextView text = findViewById(R.id.navHomeText);
+        navHome.setSelected(true);
         icon.setColorFilter(getResources().getColor(R.color.accent_primary));
         text.setTextColor(getResources().getColor(R.color.accent_primary));
     }
@@ -200,9 +201,11 @@ public class MainActivity extends android.app.Activity {
             favName.setText(c.name);
             if (c.photoUri != null) {
                 avatarInitial.setVisibility(View.GONE);
+                avatarImage.setClipToOutline(true);
                 avatarImage.setImageURI(Uri.parse(c.photoUri));
             } else {
                 avatarImage.setBackgroundResource(ContactUtils.avatarDrawableRes(c.name, this));
+                avatarImage.setClipToOutline(true);
                 avatarInitial.setVisibility(View.VISIBLE);
                 avatarInitial.setText(c.getInitial());
             }
@@ -257,7 +260,14 @@ public class MainActivity extends android.app.Activity {
                     phoneMatch = true; break;
                 }
             }
-            if (nameMatch || phoneMatch) filtered.add(c);
+            boolean emailMatch = false;
+            for (ContactModel.EmailEntry email : c.emails) {
+                if (email.address.toLowerCase(Locale.US).contains(q)) {
+                    emailMatch = true;
+                    break;
+                }
+            }
+            if (nameMatch || phoneMatch || emailMatch) filtered.add(c);
         }
         renderContactList(filtered);
     }

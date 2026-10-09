@@ -1,0 +1,25 @@
+<resources>
+    <color name="colorAccent">#0A84FF</color>
+    <color name="colorPrimary">#0A84FF</color>
+    <color name="colorPrimaryDark">#0060C7</color>
+    <color name="colorControlHighlight">#38383A</color>
+    <color name="colorControlNormal">#0A84FF</color>
+    <color name="bg_primary">#000000</color>
+    <color name="bg_secondary">#1C1C1E</color>
+    <color name="surface_card">#1C1C1E</color>
+    <color name="surface_elevated">#2C2C2E</color>
+    <color name="text_primary">#F2F2F7</color>
+    <color name="text_secondary">#AEAEB2</color>
+    <color name="text_tertiary">#8E8E93</color>
+    <color name="divider">#38383A</color>
+    <color name="accent_primary">#0A84FF</color>
+    <color name="accent_star">#FFD60A</color>
+    <color name="accent_error">#FF6961</color>
+    <color name="accent_success">#30D158</color>
+    <color name="avatar_bg_1">#62518A</color>
+    <color name="avatar_bg_2">#376D79</color>
+    <color name="avatar_bg_3">#935B48</color>
+    <color name="avatar_bg_4">#4B765A</color>
+    <color name="avatar_bg_5">#80617B</color>
+    <color name="nav_selected_bg">#17283A</color>
+</resources>

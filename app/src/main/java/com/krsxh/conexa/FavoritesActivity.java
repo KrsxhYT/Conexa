@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FavoritesActivity extends android.app.Activity {
+public class FavoritesActivity extends BaseActivity {
 
     private EditText searchInput;
     private ImageButton clearSearchBtn;
@@ -98,6 +98,7 @@ public class FavoritesActivity extends android.app.Activity {
     private void highlightTab() {
         ImageView icon = findViewById(R.id.navFavoritesIcon);
         TextView text = findViewById(R.id.navFavoritesText);
+        findViewById(R.id.navFavorites).setSelected(true);
         icon.setColorFilter(getResources().getColor(R.color.accent_primary));
         text.setTextColor(getResources().getColor(R.color.accent_primary));
     }
@@ -145,7 +146,14 @@ public class FavoritesActivity extends android.app.Activity {
                     }
                 }
             }
-            if (nameMatches || phoneMatches) filtered.add(contact);
+            boolean emailMatches = false;
+            for (ContactModel.EmailEntry email : contact.emails) {
+                if (email.address.toLowerCase(Locale.getDefault()).contains(normalizedQuery)) {
+                    emailMatches = true;
+                    break;
+                }
+            }
+            if (nameMatches || phoneMatches || emailMatches) filtered.add(contact);
         }
         return filtered;
     }

@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.*;
 import com.krsxh.conexa.utils.PreferencesManager;
 
-public class SettingsActivity extends android.app.Activity {
+public class SettingsActivity extends BaseActivity {
 
     private PreferencesManager prefsManager;
     private TextView themeValueText, sortValueText;
@@ -52,13 +52,16 @@ public class SettingsActivity extends android.app.Activity {
 
         ImageView settingsIcon = findViewById(R.id.navSettingsIcon);
         TextView settingsText = findViewById(R.id.navSettingsText);
+        navSettings.setSelected(true);
         settingsIcon.setColorFilter(getResources().getColor(R.color.accent_primary));
         settingsText.setTextColor(getResources().getColor(R.color.accent_primary));
 
         navHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new android.content.Intent(SettingsActivity.this, MainActivity.class));
+                startActivity(new android.content.Intent(SettingsActivity.this, MainActivity.class)
+                    .addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP));
                 finish();
             }
         });
@@ -82,35 +85,45 @@ public class SettingsActivity extends android.app.Activity {
 
     private void updateValues() {
         String theme = prefsManager.getThemeMode();
-        themeValueText.setText(theme.equals("light") ? "Light" : theme.equals("dark") ? "Dark" : "System Default");
+        themeValueText.setText(theme.equals("light") ? R.string.theme_light
+            : theme.equals("dark") ? R.string.theme_dark : R.string.theme_system);
         String sort = prefsManager.getSortOrder();
-        sortValueText.setText(sort.equals("last_name") ? "Last name" : "First name");
+        sortValueText.setText(sort.equals("last_name") ? R.string.sort_last_name : R.string.sort_first_name);
     }
 
     private void showThemeDialog() {
-        final String[] options = {"Light", "Dark", "System Default"};
+        final String[] options = {
+            getString(R.string.theme_light),
+            getString(R.string.theme_dark),
+            getString(R.string.theme_system)
+        };
         final String[] keys = {"light", "dark", "system"};
+        int selected = prefsManager.getThemeMode().equals("light") ? 0
+            : prefsManager.getThemeMode().equals("dark") ? 1 : 2;
         new android.app.AlertDialog.Builder(this)
-            .setTitle("Theme")
-            .setItems(options, new android.content.DialogInterface.OnClickListener() {
+            .setTitle(R.string.theme)
+            .setSingleChoiceItems(options, selected, new android.content.DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(android.content.DialogInterface dialog, int which) {
                     prefsManager.setThemeMode(keys[which]);
-                    updateValues();
+                    BaseActivity.applyTheme(keys[which]);
+                    dialog.dismiss();
                 }
             }).show();
     }
 
     private void showSortDialog() {
-        final String[] options = {"First name", "Last name"};
+        final String[] options = {getString(R.string.sort_first_name), getString(R.string.sort_last_name)};
         final String[] keys = {"first_name", "last_name"};
+        int selected = prefsManager.getSortOrder().equals("last_name") ? 1 : 0;
         new android.app.AlertDialog.Builder(this)
-            .setTitle("Sort contacts")
-            .setItems(options, new android.content.DialogInterface.OnClickListener() {
+            .setTitle(R.string.sort_contacts)
+            .setSingleChoiceItems(options, selected, new android.content.DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(android.content.DialogInterface dialog, int which) {
                     prefsManager.setSortOrder(keys[which]);
                     updateValues();
+                    dialog.dismiss();
                 }
             }).show();
     }

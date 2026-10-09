@@ -22,6 +22,7 @@
 			android:layout_height="50dp"
 			android:background="@drawable/bg_avatar_1"
 			android:src="@drawable/default_image"
+			android:clipToOutline="true"
 			android:scaleType="centerCrop"
 			android:focusable="false" />
 		<TextView
@@ -69,6 +70,17 @@
 		android:src="@drawable/ic_star_filled"
 		android:scaleType="center"
 		android:focusable="false"
+		android:visibility="gone"
+		app:tint="@color/accent_star" />
+	<ImageButton
+		android:id="@+id/quickCallBtn"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:layout_marginLeft="8dp"
+		android:background="@drawable/bg_ripple"
+		android:contentDescription="@string/call_contact"
+		android:padding="10dp"
+		android:src="@drawable/ic_call"
 		android:visibility="gone"
 		app:tint="@color/accent_primary" />
 </LinearLayout>

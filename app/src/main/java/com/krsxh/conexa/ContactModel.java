@@ -10,7 +10,10 @@ public class ContactModel {
     public String photoUri;
     public boolean starred;
     public List<PhoneEntry> phones = new ArrayList<>();
-    public String email;
+    public List<EmailEntry> emails = new ArrayList<>();
+    public List<AddressEntry> addresses = new ArrayList<>();
+    public String organization;
+    public String jobTitle;
 
     public static class PhoneEntry {
         public String number;
@@ -21,8 +24,32 @@ public class ContactModel {
         }
     }
 
+    public static class EmailEntry {
+        public String address;
+        public String label;
+
+        public EmailEntry(String address, String label) {
+            this.address = address;
+            this.label = label;
+        }
+    }
+
+    public static class AddressEntry {
+        public String address;
+        public String label;
+
+        public AddressEntry(String address, String label) {
+            this.address = address;
+            this.label = label;
+        }
+    }
+
     public String getPrimaryPhone() {
         return phones.isEmpty() ? "" : phones.get(0).number;
+    }
+
+    public String getPrimaryEmail() {
+        return emails.isEmpty() ? "" : emails.get(0).address;
     }
 
     public String getInitial() {

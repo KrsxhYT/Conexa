@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-public class ProfileActivity extends android.app.Activity {
+public class ProfileActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

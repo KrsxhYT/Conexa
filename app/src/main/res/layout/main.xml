@@ -136,7 +136,7 @@
 						android:layout_height="wrap_content"
 						android:paddingLeft="18dp"
 						android:paddingBottom="10dp"
-						android:text="Favorites"
+						android:text="@string/favorites_title"
 						android:textSize="15sp"
 						android:textStyle="bold" />
 					<HorizontalScrollView
@@ -187,6 +187,7 @@
 					android:id="@+id/contactsRecyclerView"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:accessibilityLiveRegion="polite"
 					android:paddingTop="6dp"
 					android:paddingBottom="28dp"
 					android:clipToPadding="false" />

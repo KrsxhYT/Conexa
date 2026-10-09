@@ -2,12 +2,15 @@ package com.krsxh.conexa;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.ActivityNotFoundException;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.krsxh.conexa.utils.PreferencesManager;
 import java.util.*;
@@ -91,8 +94,25 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final ContactModel contact = (ContactModel) item;
             ContactHolder h = (ContactHolder) holder;
             h.name.setText(contact.name);
-            h.subtext.setText(contact.getPrimaryPhone());
+            String subtext = contact.getPrimaryPhone();
+            if (subtext.isEmpty()) subtext = contact.getPrimaryEmail();
+            if (subtext.isEmpty()) subtext = contact.organization;
+            if (subtext == null || subtext.isEmpty()) {
+                subtext = context.getString(R.string.no_contact_details);
+            }
+            h.subtext.setText(subtext);
             h.star.setVisibility(contact.starred ? View.VISIBLE : View.GONE);
+            h.avatarImage.setClipToOutline(true);
+            h.quickCall.setVisibility(contact.getPrimaryPhone().isEmpty() ? View.GONE : View.VISIBLE);
+            h.quickCall.setOnClickListener(v -> {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL,
+                    Uri.fromParts("tel", contact.getPrimaryPhone(), null));
+                try {
+                    context.startActivity(callIntent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(context, R.string.could_not_open_dialer, Toast.LENGTH_SHORT).show();
+                }
+            });
 
             if (contact.photoUri != null) {
                 h.avatarInitial.setVisibility(View.GONE);
@@ -133,6 +153,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     static class ContactHolder extends RecyclerView.ViewHolder {
         ImageView avatarImage, star;
+        ImageButton quickCall;
         TextView avatarInitial, name, subtext;
         ContactHolder(View v) {
             super(v);
@@ -141,6 +162,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             name = v.findViewById(R.id.contactName);
             subtext = v.findViewById(R.id.contactSubtext);
             star = v.findViewById(R.id.starIndicator);
+            quickCall = v.findViewById(R.id.quickCallBtn);
         }
     }
 }
