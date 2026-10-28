@@ -1,25 +1,59 @@
 <resources>
-    <color name="colorAccent">#007AFF</color>
-    <color name="colorPrimary">#007AFF</color>
-    <color name="colorPrimaryDark">#0059C7</color>
-    <color name="colorControlHighlight">#D6E9FF</color>
-    <color name="colorControlNormal">#007AFF</color>
+    <!-- Brand -->
+    <color name="colorAccent">#0A84FF</color>
+    <color name="colorPrimary">#0A84FF</color>
+    <color name="colorPrimaryDark">#0066CC</color>
+    <color name="colorControlHighlight">#D1E9FF</color>
+    <color name="colorControlNormal">#0A84FF</color>
+
+    <!-- Backgrounds - iOS style -->
     <color name="bg_primary">#F2F2F7</color>
     <color name="bg_secondary">#FFFFFF</color>
+    <color name="bg_tertiary">#E5E5EA</color>
     <color name="surface_card">#FFFFFF</color>
     <color name="surface_elevated">#FFFFFF</color>
-    <color name="text_primary">#1C1C1E</color>
-    <color name="text_secondary">#6D6D72</color>
+    <color name="surface_grouped">#F2F2F7</color>
+
+    <!-- Text -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#3C3C43</color>
     <color name="text_tertiary">#8E8E93</color>
-    <color name="divider">#E5E5EA</color>
-    <color name="accent_primary">#007AFF</color>
-    <color name="accent_star">#E5A820</color>
-    <color name="accent_error">#D94F62</color>
-    <color name="accent_success">#258C69</color>
-    <color name="avatar_bg_1">#8E7CC3</color>
-    <color name="avatar_bg_2">#5C9EAD</color>
-    <color name="avatar_bg_3">#D08770</color>
-    <color name="avatar_bg_4">#78A887</color>
-    <color name="avatar_bg_5">#B48EAD</color>
-    <color name="nav_selected_bg">#E5F1FF</color>
+    <color name="text_quaternary">#C7C7CC</color>
+
+    <!-- Separators -->
+    <color name="divider">#C6C6C8</color>
+    <color name="separator">#3C3C435C</color>
+
+    <!-- Accents -->
+    <color name="accent_primary">#0A84FF</color>
+    <color name="accent_primary_pressed">#0071E3</color>
+    <color name="accent_star">#FF9F0A</color>
+    <color name="accent_error">#FF453A</color>
+    <color name="accent_success">#30D158</color>
+    <color name="accent_warning">#FF9F0A</color>
+    <color name="accent_purple">#BF5AF2</color>
+    <color name="accent_pink">#FF375F</color>
+    <color name="accent_teal">#64D2FF</color>
+
+    <!-- Avatar backgrounds - refined -->
+    <color name="avatar_bg_1">#5E5CE6</color>
+    <color name="avatar_bg_2">#0A84FF</color>
+    <color name="avatar_bg_3">#FF9F0A</color>
+    <color name="avatar_bg_4">#30D158</color>
+    <color name="avatar_bg_5">#FF375F</color>
+    <color name="avatar_bg_6">#BF5AF2</color>
+    <color name="avatar_bg_7">#64D2FF</color>
+    <color name="avatar_bg_8">#FFD60A</color>
+
+    <!-- Navigation -->
+    <color name="nav_selected_bg">#E5F0FF</color>
+    <color name="nav_unselected">#8E8E93</color>
+
+    <!-- Overlays -->
+    <color name="overlay_light">#80FFFFFF</color>
+    <color name="overlay_dark">#80000000</color>
+
+    <!-- Search bar -->
+    <color name="search_bg">#E5E5EA</color>
+    <color name="search_bg_focused">#FFFFFF</color>
 </resources>
